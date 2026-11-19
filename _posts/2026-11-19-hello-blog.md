@@ -1,6 +1,6 @@
 ---
 title: 博客开张：Jekyll Chirpy + GitHub Actions
-date: 2026-11-19 12:00:00 +0800
+date: 2026-11-19 10:00:00 +0800
 categories: [技术学习, 博客]
 tags: [jekyll, github]
 ---
@@ -14,7 +14,7 @@ tags: [jekyll, github]
 ```yaml
 ---
 title: 文章标题
-date: 2026-11-19 12:00:00 +0800
+date: 2026-11-19 10:00:00 +0800
 categories: [分类, 子分类]
 tags: [标签1, 标签2]
 ---
