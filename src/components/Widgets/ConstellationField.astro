@@ -1,0 +1,52 @@
+---
+// Starfield background, ported from Vibe-UI constellation-field (MIT).
+// Shown in dark mode only; persists across ClientRouter navigations.
+---
+
+<canvas
+  id="constellation-field"
+  class="constellation-field"
+  aria-hidden="true"
+  transition:persist
+></canvas>
+
+<style>
+  .constellation-field {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    display: none;
+    opacity: 0.85;
+  }
+  :global(html.dark) .constellation-field {
+    display: block;
+  }
+</style>
+
+<script>
+  import { createConstellationField } from '@/scripts/constellation-field.js'
+
+  let destroy: (() => void) | null = null
+
+  function sync() {
+    const canvas = document.getElementById('constellation-field') as HTMLCanvasElement | null
+    const isDark = document.documentElement.classList.contains('dark')
+    if (isDark && canvas && !destroy) {
+      destroy = createConstellationField(canvas)
+    }
+    else if (!isDark && destroy) {
+      destroy()
+      destroy = null
+    }
+  }
+
+  new MutationObserver(sync).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  })
+  document.addEventListener('astro:page-load', sync)
+  sync()
+</script>
